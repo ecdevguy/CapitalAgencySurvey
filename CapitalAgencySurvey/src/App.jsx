@@ -6,7 +6,7 @@ import Navbar from './components/NavBar';
 
 
 const App = () => {
-    const [isDark, setIsDark] = useState(true);
+    const [isDark, setIsDark] = useState(false);
     const handleDarkModeToggle = () => {
       setIsDark(!isDark);
     };
@@ -58,7 +58,9 @@ const App = () => {
         <div className="App">
           <Navbar handleDarkModeToggle={handleDarkModeToggle} isDark={isDark}/>
             {/* <button onClick={() => setIsDark(!isDark)}>toggle</button> */}
-            <SurveyComponent json={surveyJson} isDark={isDark} onComplete={handleSurveyComplete}/>
+            <div className="Survey">
+              <SurveyComponent json={surveyJson} isDark={isDark} onComplete={handleSurveyComplete}/>
+            </div>
         </div>
     );
 };
