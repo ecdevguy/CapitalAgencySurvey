@@ -259,7 +259,7 @@
         },
         {
           "type": "boolean",
-          "name": "question1",
+          "name": "hasTrampolineOrPool",
           "visibleIf": "{homeInsurance} = true",
           "title": "Do you have a trampoline or pool?",
           "isRequired": true
