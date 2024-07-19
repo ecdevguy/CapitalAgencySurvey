@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import SurveyComponent from './components/SurveyComponent';
 import surveyJson from './survey.json';
 import emailjs from 'emailjs-com';
+import Navbar from './components/NavBar';
 
 
 const App = () => {
     const [isDark, setIsDark] = useState(true);
-
+    const handleDarkModeToggle = () => {
+      setIsDark(!isDark);
+    };
     const handleSurveyComplete = (data) => {
         const checkInsuranceTypes = (data) => {
             const insuranceTypes = [];
@@ -53,6 +56,7 @@ const App = () => {
 
     return (
         <div className="App">
+          <Navbar handleDarkModeToggle={handleDarkModeToggle} isDark={isDark}/>
             {/* <button onClick={() => setIsDark(!isDark)}>toggle</button> */}
             <SurveyComponent json={surveyJson} isDark={isDark} onComplete={handleSurveyComplete}/>
         </div>

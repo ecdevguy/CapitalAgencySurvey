@@ -50,6 +50,9 @@
         {
           "type": "panel",
           "name": "homeOwnerAddress",
+          "visibleIf": "{homeInsurance} = true",
+          "title": "Address of Home",
+          "isRequired": true,
           "elements": [
             {
               "type": "text",
@@ -104,14 +107,13 @@
               "title": "This is my current address.",
               "isRequired": true
             }
-          ],
-          "visibleIf": "{homeInsurance} = true",
-          "title": "Address of Home",
-          "isRequired": true
+          ]
         },
         {
           "type": "panel",
           "name": "currentAddress",
+          "visibleIf": "{homeInsurance} = true and {isCurrentAddress} = false",
+          "title": "Current Address",
           "elements": [
             {
               "type": "text",
@@ -160,15 +162,8 @@
               },
               "placeholder": "USA"
             }
-          ],
-          "visibleIf": "{homeInsurance} = true and {isCurrentAddress} = false",
-          "title": "Current Address"
-        }
-      ]
-    },
-    {
-      "name": "homeInsurancePage2",
-      "elements": [
+          ]
+        },
         {
           "type": "panel",
           "name": "basementInfo",
@@ -259,16 +254,11 @@
         },
         {
           "type": "boolean",
-          "name": "hasTrampolineOrPool",
+          "name": "question1",
           "visibleIf": "{homeInsurance} = true",
           "title": "Do you have a trampoline or pool?",
           "isRequired": true
-        }
-      ]
-    },
-    {
-      "name": "homeInsurancePage3",
-      "elements": [
+        },
         {
           "type": "panel",
           "name": "specialItemInfo",
@@ -383,6 +373,9 @@
         {
           "type": "panel",
           "name": "panel1",
+          "visibleIf": "{homeInsurance} = false and {autoInsurance} = true",
+          "title": "Address",
+          "isRequired": true,
           "elements": [
             {
               "type": "text",
@@ -431,16 +424,8 @@
               },
               "placeholder": "USA"
             }
-          ],
-          "visibleIf": "{homeInsurance} = false and {autoInsurance} = true",
-          "title": "Address",
-          "isRequired": true
-        }
-      ]
-    },
-    {
-      "name": "autoInsurancePage2",
-      "elements": [
+          ]
+        },
         {
           "type": "paneldynamic",
           "name": "vinInfo",
@@ -450,18 +435,7 @@
             {
               "type": "text",
               "name": "vin",
-              "title": "Vehicle identification number:"
-            },
-            {
-              "type": "text",
-              "name": "make",
-              "title": "Make:"
-            },
-            {
-              "type": "text",
-              "name": "model",
-              "startWithNewLine": false,
-              "title": "Model:"
+              "title": " Vehicle identification number:"
             }
           ],
           "panelCount": 1,
@@ -497,11 +471,13 @@
         {
           "type": "boolean",
           "name": "boatInsurance",
-          "title": "Interested in boat insurance?"
+          "title": "Interested in boat insurance?",
+          "isRequired": true
         },
         {
           "type": "panel",
           "name": "boatInfo",
+          "visibleIf": "{boatInsurance} = true",
           "elements": [
             {
               "type": "text",
@@ -554,23 +530,20 @@
               "name": "boatStorageLocation",
               "title": "Where is the boat stored?"
             }
-          ],
-          "visibleIf": "{boatInsurance} = true"
-        }
-      ]
-    },
-    {
-      "name": "boatTrailerInsurancePage1",
-      "elements": [
+          ]
+        },
         {
           "type": "boolean",
           "name": "boatTrailerInsurance",
-          "title": "Do you want to insure a trailer with the boat?",
+          "visibleIf": "{boatInsurance} = true",
+          "title": "Do you want to insure a trailer with the boat? ",
           "isRequired": true
         },
         {
           "type": "panel",
           "name": "trailerInfo",
+          "visibleIf": "{boatTrailerInsurance} = true",
+          "title": "Trailer information",
           "elements": [
             {
               "type": "text",
@@ -601,9 +574,7 @@
               "title": "Approximate value of trailer:",
               "inputType": "number"
             }
-          ],
-          "visibleIf": "{boatTrailerInsurance} = true",
-          "title": "Trailer information"
+          ]
         }
       ]
     },
@@ -619,6 +590,8 @@
         {
           "type": "panel",
           "name": "rvInfo",
+          "visibleIf": "{rvInsurance} = true",
+          "title": "RV information",
           "elements": [
             {
               "type": "text",
@@ -668,9 +641,7 @@
               "name": "rvStorageLocation",
               "title": "Where is it typically stored?"
             }
-          ],
-          "visibleIf": "{rvInsurance} = true",
-          "title": "RV information"
+          ]
         }
       ]
     }
