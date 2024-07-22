@@ -46,7 +46,7 @@ const Navbar = ({isDark, handleDarkModeToggle}) => {
             src={!isDark ? LogoDark : Logo}
             alt="Logo"
             style={{
-              height: '60px',
+              height: '56px',
               marginRight: '16px',
               marginBottom: '16px',
               marginTop: '16px',
