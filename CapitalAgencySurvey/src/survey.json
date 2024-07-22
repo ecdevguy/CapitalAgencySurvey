@@ -254,7 +254,7 @@
         },
         {
           "type": "boolean",
-          "name": "question1",
+          "name": "hasPoolOrTrampoline",
           "visibleIf": "{homeInsurance} = true",
           "title": "Do you have a trampoline or pool?",
           "isRequired": true
@@ -436,6 +436,17 @@
               "type": "text",
               "name": "vin",
               "title": " Vehicle identification number:"
+            },
+            {
+              "type": "text",
+              "name": "makeAuto",
+              "title": "Make:"
+            },
+            {
+              "type": "text",
+              "name": "modelAuto",
+              "startWithNewLine": false,
+              "title": "Model:"
             }
           ],
           "panelCount": 1,
@@ -482,8 +493,7 @@
             {
               "type": "text",
               "name": "hullNumber",
-              "title": "Hull number:",
-              "inputType": "number"
+              "title": "Hull number:"
             },
             {
               "type": "text",
@@ -596,9 +606,7 @@
             {
               "type": "text",
               "name": "vinRv",
-              "title": "VIN number:",
-              "isRequired": true,
-              "inputType": "number"
+              "title": "VIN number:"
             },
             {
               "type": "text",
