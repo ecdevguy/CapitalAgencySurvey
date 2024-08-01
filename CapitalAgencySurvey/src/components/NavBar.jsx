@@ -26,8 +26,8 @@ const Navbar = ({isDark, handleDarkModeToggle}) => {
     palette: {
       mode: 'dark',
       background: {
-        default: '#212533', // Set your custom dark mode color here
-        paper: '#000410', // Customize other dark mode colors if needed
+        default: '#212533',
+        paper: '#000410',
       },
       primary: {
         main: '#5afb94',
