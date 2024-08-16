@@ -88,8 +88,8 @@
               "title": "Zip/Postal code",
               "isRequired": true,
               "inputType": "number",
-              "min": 501,
-              "max": 14925,
+              "min": 0,
+              "max": 99999,
               "placeholder": "10014"
             },
             {
@@ -99,7 +99,7 @@
               "choicesByUrl": {
                 "url": "https://surveyjs.io/api/CountriesExample"
               },
-              "placeholder": "USA"
+              "placeholder": "United States"
             },
             {
               "type": "boolean",
@@ -149,8 +149,8 @@
               "title": "Zip/Postal code",
               "isRequired": true,
               "inputType": "number",
-              "min": 501,
-              "max": 14925,
+              "min": 0,
+              "max": 99999,
               "placeholder": "10014"
             },
             {
@@ -160,7 +160,7 @@
               "choicesByUrl": {
                 "url": "https://surveyjs.io/api/CountriesExample"
               },
-              "placeholder": "USA"
+              "placeholder": "United States"
             }
           ]
         },
@@ -288,14 +288,14 @@
           "validators": [
             {
               "type": "regex",
-              "text": "Phone number must be in the following format: +0 (000) 000-00-00",
-              "regex": "^\\+?[0-9\\s\\-\\(\\)]{7,20}$"
+              "text": "Phone number must be in the following format: (123) 456-7890 or 123-456-7890",
+              "regex": "^\\(?\\d{3}\\)?[-\\s.]?\\d{3}[-\\s.]?\\d{4}$"
             }
           ],
           "inputType": "tel",
           "autocomplete": "tel",
-          "placeholder": "+0 (000) 000-00-00"
-        }
+          "placeholder": "(123) 456-7890"
+        }        
       ]
     },
     {
@@ -334,8 +334,7 @@
             {
               "type": "text",
               "name": "licenseNumberAutomobile",
-              "title": "Driver license number",
-              "inputType": "number"
+              "title": "Driver license number"
             },
             {
               "type": "text",
@@ -350,13 +349,13 @@
               "validators": [
                 {
                   "type": "regex",
-                  "text": "Phone number must be in the following format: +0 (000) 000-00-00",
-                  "regex": "^\\+?[0-9\\s\\-\\(\\)]{7,20}$"
+                  "text": "Phone number must be in the following format: (123) 456-7890 or 123-456-7890",
+                  "regex": "^\\(?\\d{3}\\)?[-\\s.]?\\d{3}[-\\s.]?\\d{4}$"
                 }
               ],
               "inputType": "tel",
               "autocomplete": "tel",
-              "placeholder": "+0 (000) 000-00-00"
+              "placeholder": "(123) 456-7890"
             },
             {
               "type": "text",
@@ -411,8 +410,8 @@
               "title": "Zip/Postal code",
               "isRequired": true,
               "inputType": "number",
-              "min": 501,
-              "max": 14925,
+              "min": 0,
+              "max": 99999,
               "placeholder": "10014"
             },
             {
@@ -422,7 +421,7 @@
               "choicesByUrl": {
                 "url": "https://surveyjs.io/api/CountriesExample"
               },
-              "placeholder": "USA"
+              "placeholder": "United States"
             }
           ]
         },
@@ -509,8 +508,7 @@
             {
               "type": "text",
               "name": "boatYear",
-              "title": "Year:",
-              "inputType": "month"
+              "title": "Year:"
             },
             {
               "type": "text",
@@ -574,15 +572,13 @@
             {
               "type": "text",
               "name": "trailerYear",
-              "title": "Year:",
-              "inputType": "month"
+              "title": "Year:"
             },
             {
               "type": "text",
               "name": "trailerValue",
               "startWithNewLine": false,
-              "title": "Approximate value of trailer:",
-              "inputType": "number"
+              "title": "Approximate value of trailer (in USD):"
             }
           ]
         }

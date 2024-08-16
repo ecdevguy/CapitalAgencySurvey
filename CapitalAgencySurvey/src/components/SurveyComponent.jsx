@@ -14,7 +14,7 @@ const SurveyComponent = ({ survey, isDark, onComplete }) => {
             const result = data.Results[0];
             const make = result.Make ? result.Make : "n/a";
             const model = result.Model ? result.Model : "n/a";
-            console.log('Decoded Make:', make, 'Model:', model);
+            console.log(result);
             return { make, model };
         } catch (err) {
             console.error('Error decoding VIN:', err);
