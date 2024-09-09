@@ -61,7 +61,7 @@ const App = () => {
         };
 
         emailjs
-            .send('service_131ckhq', 'template_hevsges', templateParams, 'q5qh7MhNpv6fcOKXV')
+            .send('service_ixtaxqx', 'template_48z67wb', templateParams, 'wWdvyJyRHAHCelIWk')
             .then(
                 (response) => {
                     console.log('Email sent successfully:', response.status, response.text);
