@@ -10,7 +10,12 @@ import theme2Dark from './themes/theme2Dark';
 const App = () => {
     const [isDark, setIsDark] = useState(false);
     const [isInitialized, setIsInitialized] = useState(false);
+    const [surveyData, setSurveyData] = useState(null);
     const surveyRef = useRef(null);
+
+    useEffect(() => {
+        setSurveyData(null);
+    }, []);
 
     useEffect(() => {
         surveyRef.current = new Model(surveyJson);
@@ -70,6 +75,32 @@ const App = () => {
                     console.error('Failed to send email:', error);
                 }
             );
+
+        setSurveyData(data);
+    };
+
+    const codeBlockStyle = {
+        backgroundColor: isDark ? '#2e2e2e' : '#f4f4f4',
+        color: isDark ? '#ffffff' : '#000000',
+        padding: '15px',
+        borderRadius: '8px',
+        fontFamily: 'monospace',
+        overflowX: 'auto',
+        whiteSpace: 'pre-wrap',
+        wordWrap: 'break-word',
+        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+        width: '80%',
+        maxWidth: '800px',
+        margin: '20px auto'
+    };
+
+    const containerStyle = {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+        marginTop: '30px',
+        padding: '20px'
     };
 
     return (
@@ -84,6 +115,14 @@ const App = () => {
                     />
                 )}
             </div>
+            {surveyData && (
+                <div style={containerStyle}>
+                    <h3>Your Responses:</h3>
+                    <pre style={codeBlockStyle}>
+                        {JSON.stringify(surveyData, null, 2)}
+                    </pre>
+                </div>
+            )}
         </div>
     );
 };
