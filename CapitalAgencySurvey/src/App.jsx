@@ -33,6 +33,28 @@ const App = () => {
         }
     }, [isDark, isInitialized]);
 
+    const formatAnswer = (answer) => {
+        if (typeof answer === 'boolean') {
+            return answer ? 'Yes' : 'No';
+        }
+        if (Array.isArray(answer)) {
+            return answer.map((item, index) => {
+                if (typeof item === 'object') {
+                    return `(${index + 1}) ` + Object.entries(item)
+                        .map(([key, value]) => `${key}: ${formatAnswer(value)}`)
+                        .join(', ');
+                }
+                return item;
+            }).join('; ');
+        }
+        if (typeof answer === 'object' && answer !== null) {
+            return Object.entries(answer)
+                .map(([key, value]) => `${key}: ${formatAnswer(value)}`)
+                .join(', ');
+        }
+        return answer;
+    };
+
     const handleSurveyComplete = (data) => {
         const checkInsuranceTypes = (data) => {
             const insuranceTypes = [];
@@ -76,7 +98,21 @@ const App = () => {
                 }
             );
 
-        setSurveyData(data);
+        const formattedData = [];
+
+        surveyRef.current.getAllQuestions().forEach((question) => {
+            const questionTitle = question.title || question.name;
+            const questionAnswer = formatAnswer(data[question.name]);
+
+            if (questionAnswer !== undefined) {
+                formattedData.push({
+                    question: questionTitle,
+                    answer: questionAnswer,
+                });
+            }
+        });
+
+        setSurveyData(formattedData);
     };
 
     const codeBlockStyle = {
@@ -91,7 +127,7 @@ const App = () => {
         boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
         width: '80%',
         maxWidth: '800px',
-        margin: '20px auto'
+        margin: '20px auto',
     };
 
     const containerStyle = {
@@ -100,7 +136,7 @@ const App = () => {
         alignItems: 'center',
         flexDirection: 'column',
         marginTop: '30px',
-        padding: '20px'
+        padding: '20px',
     };
 
     return (
@@ -108,19 +144,25 @@ const App = () => {
             <Navbar handleDarkModeToggle={handleDarkModeToggle} isDark={isDark} />
             <div className="Survey">
                 {isInitialized && surveyRef.current && (
-                    <SurveyComponent 
-                        survey={surveyRef.current} 
-                        isDark={isDark} 
-                        onComplete={handleSurveyComplete} 
+                    <SurveyComponent
+                        survey={surveyRef.current}
+                        isDark={isDark}
+                        onComplete={handleSurveyComplete}
                     />
                 )}
             </div>
             {surveyData && (
                 <div style={containerStyle}>
                     <h3>Your Responses:</h3>
+                    
                     <pre style={codeBlockStyle}>
-                        {JSON.stringify(surveyData, null, 2)}
+                        {surveyData.map((item, index) => (
+                            <p key={index}>
+                                <strong>{item.question}</strong> {item.answer}
+                            </p>
+                        ))}
                     </pre>
+                    
                 </div>
             )}
         </div>
