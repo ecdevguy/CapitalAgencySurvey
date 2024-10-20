@@ -1,12 +1,13 @@
 {
   "pages": [
     {
-      "name": "homeInsurancePagel",
+      "name": "homeInsurancePage1",
       "elements": [
         {
           "type": "boolean",
           "name": "homeInsurance",
           "title": "Interested in Home insurance?",
+          "formattedTitle": "Interested in Home insurance",
           "defaultValue": "true",
           "isRequired": true
         },
@@ -15,6 +16,7 @@
           "name": "homeOwnerInfo",
           "visibleIf": "{homeInsurance} = true",
           "title": "Owner Information (include spouses)",
+          "formattedTitle": "Home Owner Information",
           "templateElements": [
             {
               "type": "text",
@@ -52,12 +54,14 @@
           "name": "homeOwnerAddress",
           "visibleIf": "{homeInsurance} = true",
           "title": "Address of Home",
+          "formattedTitle": "Home Address",
           "isRequired": true,
           "elements": [
             {
               "type": "text",
               "name": "addressLine1",
               "title": "Address",
+              "formattedTitle": "Address Line One",
               "isRequired": true,
               "placeholder": "495 Grove Street"
             },
@@ -65,12 +69,14 @@
               "type": "text",
               "name": "addressLine2",
               "title": "Address line 2",
+              "formattedTitle": "Address Line Two",
               "placeholder": "Apartment #20"
             },
             {
               "type": "text",
               "name": "city",
               "title": "City/Town",
+              "formattedTitle": "City/Town",
               "isRequired": true,
               "placeholder": "New York"
             },
@@ -79,6 +85,7 @@
               "name": "state",
               "startWithNewLine": false,
               "title": "State/Region/Province",
+              "formattedTitle": "State/Region/Province",
               "isRequired": true,
               "placeholder": "NY"
             },
@@ -86,6 +93,7 @@
               "type": "text",
               "name": "postCode",
               "title": "Zip/Postal code",
+              "formattedTitle": "Zip/Postal Code",
               "isRequired": true,
               "inputType": "number",
               "min": 0,
@@ -96,6 +104,7 @@
               "type": "dropdown",
               "name": "country",
               "title": "Country",
+              "formattedTitle": "Country",
               "choicesByUrl": {
                 "url": "https://surveyjs.io/api/CountriesExample"
               },
@@ -105,6 +114,7 @@
               "type": "boolean",
               "name": "isCurrentAddress",
               "title": "This is my current address.",
+              "formattedTitle": "This is the current address",
               "isRequired": true
             }
           ]
@@ -119,6 +129,7 @@
               "type": "text",
               "name": "currentAddressLine1",
               "title": "Address",
+              "formattedTitle": "Address Line One",
               "isRequired": true,
               "placeholder": "495 Grove Street"
             },
@@ -126,12 +137,14 @@
               "type": "text",
               "name": "currentAddressLine2",
               "title": "Address line 2",
+              "formattedTitle": "Address Line Two",
               "placeholder": "Apartment #20"
             },
             {
               "type": "text",
               "name": "currentCity",
               "title": "City/Town",
+              "formattedTitle": "City/Town",
               "isRequired": true,
               "placeholder": "New York"
             },
@@ -140,6 +153,7 @@
               "name": "currentState",
               "startWithNewLine": false,
               "title": "State/Region/Province",
+              "formattedTitle": "State/Region/Province",
               "isRequired": true,
               "placeholder": "NY"
             },
@@ -147,6 +161,7 @@
               "type": "text",
               "name": "currentPostCode",
               "title": "Zip/Postal code",
+              "formattedTitle": "Zip/Postal Code",
               "isRequired": true,
               "inputType": "number",
               "min": 0,
@@ -157,6 +172,7 @@
               "type": "dropdown",
               "name": "currentCountry",
               "title": "Country",
+              "formattedTitle": "Country",
               "choicesByUrl": {
                 "url": "https://surveyjs.io/api/CountriesExample"
               },
@@ -167,6 +183,8 @@
         {
           "type": "panel",
           "name": "basementInfo",
+          "title": "Basement Information",
+          "formattedTitle": "Basement",
           "elements": [
             {
               "type": "boolean",
@@ -188,6 +206,7 @@
         {
           "type": "panel",
           "name": "deckInfo",
+          "title": "Deck Information",
           "elements": [
             {
               "type": "boolean",
@@ -214,6 +233,7 @@
         {
           "type": "panel",
           "name": "dogInfo",
+          "title": "Pet Information",
           "elements": [
             {
               "type": "boolean",
@@ -234,6 +254,7 @@
         {
           "type": "panel",
           "name": "hvacInfo",
+          "title": "HVAC Information",
           "elements": [
             {
               "type": "boolean",
@@ -262,6 +283,7 @@
         {
           "type": "panel",
           "name": "specialItemInfo",
+          "title": "Special Property Information",
           "elements": [
             {
               "type": "boolean",

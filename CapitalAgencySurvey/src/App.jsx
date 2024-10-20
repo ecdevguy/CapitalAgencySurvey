@@ -55,6 +55,17 @@ const App = () => {
         return answer;
     };
 
+    const findSurveyQuestion = (questionName) => {
+        for (const page of surveyJson.pages) {
+            for (const element of page.elements) {
+                if (element.name === questionName) {
+                    return element;
+                }
+            }
+        }
+        return null;
+    };
+
     const handleSurveyComplete = (data) => {
         const checkInsuranceTypes = (data) => {
             const insuranceTypes = [];
@@ -87,21 +98,22 @@ const App = () => {
             message: JSON.stringify(data, null, 2),
         };
 
-        emailjs
-            .send('service_ixtaxqx', 'template_48z67wb', templateParams, 'wWdvyJyRHAHCelIWk')
-            .then(
-                (response) => {
-                    console.log('Email sent successfully:', response.status, response.text);
-                },
-                (error) => {
-                    console.error('Failed to send email:', error);
-                }
-            );
+        // emailjs
+        //     .send('service_ixtaxqx', 'template_48z67wb', templateParams, 'wWdvyJyRHAHCelIWk')
+        //     .then(
+        //         (response) => {
+        //             console.log('Email sent successfully:', response.status, response.text);
+        //         },
+        //         (error) => {
+        //             console.error('Failed to send email:', error);
+        //         }
+        //     );
 
         const formattedData = [];
 
         surveyRef.current.getAllQuestions().forEach((question) => {
-            const questionTitle = question.title || question.name;
+            const surveyQuestion = findSurveyQuestion(question.name);
+            const questionTitle = (surveyQuestion?.formattedTitle) || question.title || question.name;
             const questionAnswer = formatAnswer(data[question.name]);
 
             if (questionAnswer !== undefined) {
@@ -157,12 +169,15 @@ const App = () => {
                     
                     <pre style={codeBlockStyle}>
                         {surveyData.map((item, index) => (
-                            <p key={index}>
-                                <strong>{item.question}</strong> {item.answer}
-                            </p>
+                            <div key={index}>
+                                <p>
+                                    <strong>{item.question}</strong>
+                                </p>
+                                <p>{item.answer}</p>
+                                <br />
+                            </div>
                         ))}
                     </pre>
-                    
                 </div>
             )}
         </div>
@@ -170,3 +185,5 @@ const App = () => {
 };
 
 export default App;
+
+
