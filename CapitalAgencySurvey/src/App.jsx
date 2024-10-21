@@ -65,6 +65,7 @@ const App = () => {
         }
         return null;
     };
+ 
 
     const handleSurveyComplete = (data) => {
         const checkInsuranceTypes = (data) => {
@@ -115,12 +116,14 @@ const App = () => {
             const surveyQuestion = findSurveyQuestion(question.name);
             const questionTitle = (surveyQuestion?.formattedTitle) || question.title || question.name;
             const questionAnswer = formatAnswer(data[question.name]);
-
             if (questionAnswer !== undefined) {
-                formattedData.push({
-                    question: questionTitle,
-                    answer: questionAnswer,
-                });
+                formattedData.push(
+                    <div key={question.name}>
+                        <p><strong>{questionTitle}</strong></p>
+                        <p>{questionAnswer}</p>
+                        <br />
+                    </div>
+                );
             }
         });
 
@@ -168,15 +171,7 @@ const App = () => {
                     <h3>Your Responses:</h3>
                     
                     <pre style={codeBlockStyle}>
-                        {surveyData.map((item, index) => (
-                            <div key={index}>
-                                <p>
-                                    <strong>{item.question}</strong>
-                                </p>
-                                <p>{item.answer}</p>
-                                <br />
-                            </div>
-                        ))}
+                        {surveyData}
                     </pre>
                 </div>
             )}

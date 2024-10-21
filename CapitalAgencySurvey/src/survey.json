@@ -278,6 +278,7 @@
           "name": "hasPoolOrTrampoline",
           "visibleIf": "{homeInsurance} = true",
           "title": "Do you have a trampoline or pool?",
+          "formattedTitle": "Trampoline or Pool",
           "isRequired": true
         },
         {
@@ -307,6 +308,7 @@
           "name": "phone",
           "visibleIf": "{homeInsurance} = true",
           "title": "Best contact number?",
+          "formattedTitle": "Contact Number",
           "validators": [
             {
               "type": "regex",
