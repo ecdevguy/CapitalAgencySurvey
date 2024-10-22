@@ -56,15 +56,35 @@ const App = () => {
     };
 
     const findSurveyQuestion = (questionName) => {
-        for (const page of surveyJson.pages) {
-            for (const element of page.elements) {
+        const searchElements = (elements) => {
+            for (const element of elements) {
                 if (element.name === questionName) {
                     return element;
                 }
+                if (element.elements && Array.isArray(element.elements)) {
+                    const foundInElements = searchElements(element.elements);
+                    if (foundInElements) {
+                        return foundInElements;
+                    }
+                }
+                if (element.templateElements && Array.isArray(element.templateElements)) {
+                    const foundInTemplate = searchElements(element.templateElements);
+                    if (foundInTemplate) {
+                        return foundInTemplate;
+                    }
+                }
+            }
+            return null;
+        };
+        for (const page of surveyJson.pages) {
+            const found = searchElements(page.elements);
+            if (found) {
+                return found;
             }
         }
         return null;
     };
+    
  
 
     const handleSurveyComplete = (data) => {
@@ -92,42 +112,115 @@ const App = () => {
         const homeOwnerInfo = data.homeOwnerInfo || [];
         const firstName = homeOwnerInfo.length > 0 ? homeOwnerInfo[0].firstName : 'N/A';
 
+        const formattedData = [];
+        const formattedEmailData = [];
+
+        surveyRef.current.getAllQuestions().forEach((question) => {
+            const surveyQuestion = findSurveyQuestion(question.name);
+            const questionTitle = surveyQuestion?.formattedTitle || question.title || question.name;
+            const questionAnswer = data[question.name];
+        
+            if (surveyQuestion?.type === 'paneldynamic' && Array.isArray(surveyQuestion.templateElements) && Array.isArray(questionAnswer)) {
+                questionAnswer.forEach((panel, panelIndex) => {
+                    formattedData.push(
+                        <p key={`${question.name}-${panelIndex}-header`}><strong>{questionTitle}{' '}{panelIndex + 1}</strong></p>
+                    );
+                    formattedEmailData.push({
+                        question: questionTitle + ' ' + panelIndex + 1,
+                        answer: null
+                    }
+                    );
+                    surveyQuestion.templateElements.forEach((element) => {
+                        const elementAnswer = panel[element.name];
+                        if (elementAnswer !== undefined) {
+                            formattedData.push(
+                                <div key={`${question.name}-${panelIndex}-${element.name}`}>
+                                    <p>{element.formattedTitle || element.title}</p>
+                                    <p>{formatAnswer(elementAnswer)}</p>
+                                    <br />
+                                </div>
+                            );
+                            formattedEmailData.push({
+                                question: element.formattedTitle || element.title,
+                                answer: formatAnswer(elementAnswer)
+                            }
+                            );
+                        }
+                    });
+                });
+            }
+        
+            if (surveyQuestion?.type === 'panel' && Array.isArray(surveyQuestion.elements)) {
+                formattedData.push(
+                    <p key={`${question.name}-header`}><strong>{questionTitle}</strong></p>
+                );
+                formattedEmailData.push({
+                    question: questionTitle,
+                    answer: null
+                }
+                );
+                surveyQuestion.elements.forEach((element) => {
+                    const elementAnswer = questionAnswer ? questionAnswer[element.name] : undefined;
+                    if (elementAnswer !== undefined) {
+                        formattedData.push(
+                            <div key={`${question.name}-${element.name}`}>
+                                <p>{element.formattedTitle || element.title}</p>
+                                <p>{formatAnswer(elementAnswer)}</p>
+                                <br />
+                            </div>
+                        );
+                        formattedEmailData.push({
+                            question: element.formattedTitle || element.title,
+                            answer: formatAnswer(questionAnswer)
+                        }
+                        );
+                    }
+                });
+            }
+        
+            if (!Array.isArray(surveyQuestion?.templateElements) && !Array.isArray(surveyQuestion?.elements) && questionAnswer !== undefined) {
+                formattedData.push(
+                    <div key={question.name}>
+                        <p><strong>{questionTitle}</strong></p>
+                        <p>{formatAnswer(questionAnswer)}</p>
+                        <br />
+                    </div>
+                );
+                formattedEmailData.push({
+                    question: questionTitle,
+                    answer: formatAnswer(questionAnswer)
+                }
+                );
+            }
+        });
+        
+        setSurveyData(formattedData);
+        const formattedMessage = formattedEmailData
+        .map((item) => {
+            if(item.answer === null) {
+                `${item.question}\n`
+            } else {
+                return `${item.question}\n${item.answer}\n\n`;
+            }
+        })
+        .join('');
         const templateParams = {
             name: 'Corbin',
             client: `${firstName}`,
             insurance: `${insuranceList}`,
-            message: JSON.stringify(data, null, 2),
+            message: formattedMessage,
         };
 
-        // emailjs
-        //     .send('service_ixtaxqx', 'template_48z67wb', templateParams, 'wWdvyJyRHAHCelIWk')
-        //     .then(
-        //         (response) => {
-        //             console.log('Email sent successfully:', response.status, response.text);
-        //         },
-        //         (error) => {
-        //             console.error('Failed to send email:', error);
-        //         }
-        //     );
-
-        const formattedData = [];
-
-        surveyRef.current.getAllQuestions().forEach((question) => {
-            const surveyQuestion = findSurveyQuestion(question.name);
-            const questionTitle = (surveyQuestion?.formattedTitle) || question.title || question.name;
-            const questionAnswer = formatAnswer(data[question.name]);
-            if (questionAnswer !== undefined) {
-                formattedData.push(
-                    <div key={question.name}>
-                        <p><strong>{questionTitle}</strong></p>
-                        <p>{questionAnswer}</p>
-                        <br />
-                    </div>
-                );
-            }
-        });
-
-        setSurveyData(formattedData);
+        emailjs
+            .send('service_ixtaxqx', 'template_48z67wb', templateParams, 'wWdvyJyRHAHCelIWk')
+            .then(
+                (response) => {
+                    console.log('Email sent successfully:', response.status, response.text);
+                },
+                (error) => {
+                    console.error('Failed to send email:', error);
+                }
+            );
     };
 
     const codeBlockStyle = {

@@ -7,7 +7,7 @@
           "type": "boolean",
           "name": "homeInsurance",
           "title": "Interested in Home insurance?",
-          "formattedTitle": "Interested in Home insurance",
+          "formattedTitle": "Interested in Home insurance?",
           "defaultValue": "true",
           "isRequired": true
         },
@@ -16,7 +16,7 @@
           "name": "homeOwnerInfo",
           "visibleIf": "{homeInsurance} = true",
           "title": "Owner Information (include spouses)",
-          "formattedTitle": "Home Owner Information",
+          "formattedTitle": "Home Owner",
           "templateElements": [
             {
               "type": "text",
@@ -114,7 +114,7 @@
               "type": "boolean",
               "name": "isCurrentAddress",
               "title": "This is my current address.",
-              "formattedTitle": "This is the current address",
+              "formattedTitle": "Current address",
               "isRequired": true
             }
           ]
@@ -129,7 +129,7 @@
               "type": "text",
               "name": "currentAddressLine1",
               "title": "Address",
-              "formattedTitle": "Address Line One",
+              "formattedTitle": "Current Address Line One",
               "isRequired": true,
               "placeholder": "495 Grove Street"
             },
@@ -137,14 +137,14 @@
               "type": "text",
               "name": "currentAddressLine2",
               "title": "Address line 2",
-              "formattedTitle": "Address Line Two",
+              "formattedTitle": "Current Address Line Two",
               "placeholder": "Apartment #20"
             },
             {
               "type": "text",
               "name": "currentCity",
               "title": "City/Town",
-              "formattedTitle": "City/Town",
+              "formattedTitle": "Current City/Town",
               "isRequired": true,
               "placeholder": "New York"
             },
@@ -153,7 +153,7 @@
               "name": "currentState",
               "startWithNewLine": false,
               "title": "State/Region/Province",
-              "formattedTitle": "State/Region/Province",
+              "formattedTitle": "Current State/Region/Province",
               "isRequired": true,
               "placeholder": "NY"
             },
@@ -161,7 +161,7 @@
               "type": "text",
               "name": "currentPostCode",
               "title": "Zip/Postal code",
-              "formattedTitle": "Zip/Postal Code",
+              "formattedTitle": "Current Zip/Postal Code",
               "isRequired": true,
               "inputType": "number",
               "min": 0,
@@ -172,7 +172,7 @@
               "type": "dropdown",
               "name": "currentCountry",
               "title": "Country",
-              "formattedTitle": "Country",
+              "formattedTitle": "Current Country",
               "choicesByUrl": {
                 "url": "https://surveyjs.io/api/CountriesExample"
               },
@@ -191,6 +191,7 @@
               "name": "hasBasement",
               "visibleIf": "{homeInsurance} = true",
               "title": "Is there a basement?",
+              "formattedTitle": "Basement",
               "isRequired": true
             },
             {
@@ -199,6 +200,7 @@
               "visibleIf": "{hasBasement} = true",
               "startWithNewLine": false,
               "title": "Is the basement finished?",
+              "formattedTitle": "Finished basement",
               "isRequired": true
             }
           ]
@@ -213,20 +215,23 @@
               "name": "hasDeck",
               "visibleIf": "{homeInsurance} = true",
               "title": "Is there a deck?",
+              "formattedTitle": "Deck",
               "isRequired": true
             },
             {
               "type": "text",
               "name": "deckSize",
               "visibleIf": "{hasDeck} = true",
-              "title": "What is the size?"
+              "title": "What is the size?",
+              "formattedTitle": "Deck size"
             },
             {
               "type": "text",
               "name": "deckMaterial",
               "visibleIf": "{hasDeck} = true",
               "startWithNewLine": false,
-              "title": "What is the material?"
+              "title": "What is the material?",
+              "formattedTitle": "Deck material"
             }
           ]
         },
@@ -239,7 +244,8 @@
               "type": "boolean",
               "name": "hasDog",
               "visibleIf": "{homeInsurance} = true",
-              "title": "Do you own any dogs?"
+              "title": "Do you own any dogs?",
+              "formattedTitle": "Dogs"
             },
             {
               "type": "text",
@@ -247,6 +253,7 @@
               "visibleIf": "{hasDog} = true",
               "startWithNewLine": false,
               "title": "Please list the breeds.",
+              "formattedTitle": "Breeds",
               "size": 0
             }
           ]
@@ -261,6 +268,7 @@
               "name": "hvacRoof",
               "visibleIf": "{homeInsurance} = true",
               "title": "Has the HVAC or Roof been replaced?",
+              "formattedTitle": "Replaced HVAC or roof",
               "isRequired": true
             },
             {
@@ -269,6 +277,7 @@
               "visibleIf": "{hvacRoof} = true",
               "startWithNewLine": false,
               "title": "What year?",
+              "formattedTitle": "Year replaced",
               "inputType": "month"
             }
           ]
@@ -290,7 +299,8 @@
               "type": "boolean",
               "name": "hasSpecialItems",
               "visibleIf": "{homeInsurance} = true",
-              "title": "Do you have any special property you want specifically listed on the policy? (Ex: Jewelry, firearms, fine arts)"
+              "title": "Do you have any special property you want specifically listed on the policy? (Ex: Jewelry, firearms, fine arts)",
+              "formattedTitle": "Special property"
             },
             {
               "type": "comment",
@@ -298,6 +308,7 @@
               "visibleIf": "{hasSpecialItems} = true",
               "startWithNewLine": false,
               "title": "Please list the items.",
+              "formattedTitle": "Special property items",
               "rows": 2,
               "autoGrow": true
             }
@@ -329,6 +340,7 @@
           "type": "boolean",
           "name": "autoInsurance",
           "title": "Interested in Auto insurance?",
+          "formattedTitle": "Interested in Auto insurance?",
           "isRequired": true
         },
         {
@@ -336,6 +348,7 @@
           "name": "automobileOwnerInfo",
           "visibleIf": "{autoInsurance} = true",
           "title": "Automobile owner information",
+          "formattedTitle": "Automobile owner",
           "templateElements": [
             {
               "type": "text",
@@ -454,11 +467,12 @@
           "name": "vinInfo",
           "visibleIf": "{autoInsurance} = true",
           "title": "VIN's for all vehicles",
+          "formattedTitle": "VIN for vehicle",
           "templateElements": [
             {
               "type": "text",
               "name": "vin",
-              "title": " Vehicle identification number:"
+              "title": "Vehicle identification number:"
             },
             {
               "type": "text",
@@ -482,20 +496,23 @@
           "name": "uberDelivery",
           "visibleIf": "{autoInsurance} = true",
           "title": "Do you do any Uber/Doordash or other delivery services with your vehicles?",
+          "formattedTitle": "Uber/Doordash or other delivery services",
           "isRequired": true
         },
         {
           "type": "boolean",
           "name": "telematicsProgram",
           "visibleIf": "{autoInsurance} = true",
-          "title": "Do you want to enroll in the telematics program? (where they track your driving) if available (usually about 10% off insurance rates)"
+          "title": "Do you want to enroll in the telematics program? (where they track your driving) if available (usually about 10% off insurance rates)",
+          "formattedTitle": "Enroll in the telematics program"
         },
         {
           "type": "boolean",
           "name": "collisionCoverage",
           "visibleIf": "{autoInsurance} = true",
           "startWithNewLine": false,
-          "title": "Do you want Comprehensive/Collision coverage on your vehicles?"
+          "title": "Do you want Comprehensive/Collision coverage on your vehicles?",
+          "formattedTitle": "Comprehensive/Collision coverage on their vehicles"
         }
       ]
     },
