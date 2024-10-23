@@ -221,6 +221,9 @@ const App = () => {
                     console.error('Failed to send email:', error);
                 }
             );
+
+            
+            setIsInitialized(false);
     };
 
     const codeBlockStyle = {
