@@ -6,11 +6,13 @@ import Navbar from './components/NavBar';
 import { Model } from 'survey-core';
 import theme2 from './themes/theme2';
 import theme2Dark from './themes/theme2Dark';
+import { BeatLoader } from 'react-spinners';
 
 const App = () => {
     const [isDark, setIsDark] = useState(false);
     const [isInitialized, setIsInitialized] = useState(false);
     const [surveyData, setSurveyData] = useState(null);
+    const [surveyResponse, setSurveyResponse] = useState('')
     const surveyRef = useRef(null);
 
     useEffect(() => {
@@ -216,11 +218,54 @@ const App = () => {
             .then(
                 (response) => {
                     console.log('Email sent successfully:', response.status, response.text);
+                    setSurveyResponse(
+                        <h1 style={{ textAlign: 'center' }}>
+                            Your survey has been submitted successfully!
+                        </h1>
+                    );
                 },
                 (error) => {
                     console.error('Failed to send email:', error);
+                    setSurveyResponse(
+                        <>
+                            <h1 style={{ textAlign: 'center', marginBottom: '25px' }}>
+                                There was an error submitting your survey.
+                            </h1>
+                            <h2 style={{ textAlign: 'center' }}>
+                                Please refresh the page and try again.
+                            </h2>
+                        </>
+                    );
                 }
             );
+
+
+        //emailjs testing
+        // emailjs
+        //     .send('service_131ckhq', 'template_hevsges', templateParams, 'q5qh7MhNpv6fcOKXV')
+        //     .then(
+        //         (response) => {
+        //             console.log('Email sent successfully:', response.status, response.text);
+        //             setSurveyResponse(
+        //                 <h1 style={{ textAlign: 'center' }}>
+        //                     Your survey has been submitted successfully!
+        //                 </h1>
+        //             );
+        //         },
+        //         (error) => {
+        //             console.error('Failed to send email:', error);
+        //             setSurveyResponse(
+        //                 <>
+        //                     <h1 style={{ textAlign: 'center', marginBottom: '25px' }}>
+        //                         There was an error submitting your survey.
+        //                     </h1>
+        //                     <h2 style={{ textAlign: 'center' }}>
+        //                         Please refresh the page and try again.
+        //                     </h2>
+        //                 </>
+        //             );
+        //         }
+        //     );
 
             
             setIsInitialized(false);
@@ -264,8 +309,15 @@ const App = () => {
             </div>
             {surveyData && (
                 <div style={containerStyle}>
+                    <div style={{
+                        margin: '80px',
+                    }}>
+                    {surveyResponse ? 
+                        surveyResponse :
+                        <BeatLoader color={isDark ? '#19b394' : '#437fd9'} loading={true} size={40}/>
+                    }
+                    </div>
                     <h3>Your Responses:</h3>
-                    
                     <pre style={codeBlockStyle}>
                         {surveyData}
                     </pre>

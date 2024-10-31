@@ -50,11 +50,14 @@ const Navbar = ({isDark, handleDarkModeToggle}) => {
               marginRight: '16px',
               marginBottom: '16px',
               marginTop: '16px',
+              cursor: 'pointer'
             }}
+            onClick={() => window.location.reload()}
+            title="Click to refresh the form"
           />
           <Box sx={{ flexGrow: 1 }} />
           <Box>
-            <Switch checked={isDark} onChange={handleDarkModeToggle} />
+            <Switch checked={isDark} onChange={handleDarkModeToggle} title="toggle dark mode"/>
           </Box>
         </Toolbar>
       </AppBar>
