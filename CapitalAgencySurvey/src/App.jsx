@@ -240,7 +240,7 @@ const App = () => {
             );
 
 
-        //emailjs testing
+        // emailjs testing
         // emailjs
         //     .send('service_131ckhq', 'template_hevsges', templateParams, 'q5qh7MhNpv6fcOKXV')
         //     .then(

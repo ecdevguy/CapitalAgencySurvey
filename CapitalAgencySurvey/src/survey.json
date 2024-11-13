@@ -694,6 +694,41 @@
           ]
         }
       ]
+    },
+    {
+      "name": "page4",
+      "elements": [
+        {
+          "type": "panel",
+          "name": "contactInformation",
+          "title": "Contact Information",
+          "elements": [
+            {
+              "type": "text",
+              "name": "email",
+              "title": "Please include your email address",
+              "formattedTitle": "Email Address",
+              "description": "Your email address will not be used for marketing purposes.",
+              "isRequired": false
+            },
+            {
+              "type": "text",
+              "name": "teamMember",
+              "title": "Have you been working with a specific team member?",
+              "description": "If so, please list their name to help us direct your request to the right agent.",
+              "isRequired": false
+            },
+            {
+              "type": "comment",
+              "name": "additionalComments",
+              "title": "Please include any questions, clarifying information, or comments",
+              "formattedTitle": "Questions, clarifying information, or comments",
+              "isRequired": false
+            }
+          ]
+        }
+        
+      ]
     }
   ],
   "showQuestionNumbers": "off",
