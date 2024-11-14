@@ -701,7 +701,7 @@
         {
           "type": "panel",
           "name": "contactInformation",
-          "title": "Contact Information",
+          "title": "Wrapping up",
           "elements": [
             {
               "type": "text",
