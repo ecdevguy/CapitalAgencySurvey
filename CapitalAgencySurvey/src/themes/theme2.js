@@ -84,7 +84,7 @@ const theme2 = (
         "--sjs-article-font-default-textCase": "none",
         "--sjs-general-backcolor-dim": "rgba(231, 240, 255, 1)",
         "--sjs-primary-backcolor": "#2772cb",
-        "--sjs-primary-backcolor-dark": "rgba(NaN, NaN, NaN, 1)",
+        "--sjs-primary-backcolor-dark": "rgba(39, 114, 203, 0.75)",
         "--sjs-primary-backcolor-light": "rgba(NaN, NaN, NaN, 0.35)",
         "--sjs-primary-forecolor": "rgba(255, 255, 255, 1)",
         "--sjs-primary-forecolor-light": "rgba(255, 255, 255, 0.25)",
